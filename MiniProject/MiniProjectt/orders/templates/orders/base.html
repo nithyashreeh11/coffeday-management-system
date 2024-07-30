@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Coffee Shop{% endblock title %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1 style="color:aliceblue;">Coffee Shop</h1>
+        <div id="cart-summary">
+            <a href="{% url 'view_cart' %}">
+                Cart: {{ cart_total_items }} item(s) - ${{ cart_total_price|floatformat:2 }}
+            </a>
+        </div>
+    </header>
+    <nav>
+        <a href="{% url 'coffee_list' %}">Coffee Menu</a> |
+        <a href="{% url 'view_cart' %}">View Cart</a>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

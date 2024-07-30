@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee List</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    {% extends 'orders/base.html' %}
+
+    {% block title %}Coffee Menu{% endblock %}
+
+    {% block content %}
+    <h1>Coffee Menu</h1>
+    <div id="coffee-list">
+        {% for coffee in coffees %}
+        <div class="coffee-item">
+            <h2>{{ coffee.name }}</h2>
+            <p>{{ coffee.description }}</p>
+            <p>Price: ${{ coffee.price }}</p>
+            <button class="add-to-cart" data-coffee-id="{{ coffee.id }}">Add to Cart</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock content %}
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

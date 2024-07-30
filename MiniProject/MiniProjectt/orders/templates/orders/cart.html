@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+{% extends 'orders/base.html' %}
+{% load custom_filters %}
+{% block title %}Shopping Cart{% endblock title %}
+
+{% block content %}
+<h2>Shopping Cart</h2>
+<div id="cart-items">
+    {% for item in cart_items %}
+    <div class="cart-item" id="cart-item-{{ item.id }}">
+        <h3>{{ item.coffee.name }}</h3>
+        <p>Quantity: {{ item.quantity }}</p>
+        <p>Price: ${{ item.coffee.price }}</p>
+        <p>Total: ${{ item.coffee.price|mul:item.quantity }}</p>
+        <button class="delete-item" data-item-id="{{ item.id }}">Delete</button>
+    </div>
+    {% endfor %}
+</div>
+<div id="cart-total">
+    <h3>Total: ${{ total|floatformat:2 }}</h3>
+</div>
+{% if cart_items %}
+<form action="{% url 'checkout' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Checkout">
+</form>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock content %}
+</body>
+</html>
